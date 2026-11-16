@@ -1,0 +1,9 @@
+# 확증용 분할 목록의 해시. 목록 자체는 데이터셋 항목 이름이라 올리지 않는다.
+# 두 가지 형태를 적는다:
+#   file  = 목록 파일 바이트 그대로의 SHA-256
+#   list16 = 정렬한 항목 이름을 줄바꿈으로 이은 문자열(끝 줄바꿈 없음)의 SHA-256 앞 16자. 사전 등록 2-1절 표와 make_split_dh.py 가 쓰는 형태
+# 분할 시드: 개발용·확증용 20261112(make_split.py), D/H 20261113(make_split_dh.py)
+
+discovery.txt  items=285  file=8d58d287d518d717f0d617660313b69b40e8ee26e5da3df8ffef37b81ef06442  list16=fda99450b56ab69f
+holdout.txt  items=450  file=70f35e69f05d22294e78811fb75c40d001fe671f719c2fe91ea330bb53f2cd48  list16=5e78b42659545b9f
+# list16 은 사전 등록 2-1절 표의 값(fda99450b56ab69f, 5e78b42659545b9f)과 같다.

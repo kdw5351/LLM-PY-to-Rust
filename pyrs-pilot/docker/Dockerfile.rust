@@ -1,0 +1,17 @@
+# 생성된 Rust 코드의 빌드(cargo build, clippy)와 실행에 쓰는 이미지.
+# 빌드: docker build -f docker/Dockerfile.rust -t pyrs-pilot/rust docker
+# 빌드 단계는 pyrs-registry(internal) 네트워크에서 crates 미러만 보고, 실행 단계는 --network none 으로 돈다. docker/README.md 참고.
+FROM rust:1.91-slim-bookworm
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        python3 pkg-config libssl-dev procps ca-certificates \
+    && rm -rf /var/lib/apt/lists/* \
+    && rustup component add clippy
+
+COPY canary /usr/local/bin/canary
+RUN chmod +x /usr/local/bin/canary && mkdir -p /canary /scratch /work /tools /harness
+
+# 하네스가 실행 시 마운트: /work (소스; 빌드 rw, 실행 ro), /scratch (픽스처·출력, rw), /tools (ro)
+# cargo 레지스트리 캐시는 하네스가 named volume(pyrs-pilot-cargo)을 /usr/local/cargo/registry 에 마운트한다.
+WORKDIR /work
+ENV CARGO_TERM_COLOR=never CARGO_NET_RETRY=0

@@ -1,0 +1,6 @@
+{
+ "qwen2.5-coder:14b": {"provider": "ollama", "enabled": true,  "in": 0.0, "out": 0.0},
+ "qwen2.5-coder:32b": {"provider": "ollama", "enabled": true,  "in": 0.0, "out": 0.0},
+ "claude-sonnet-5-5": {"provider": "anthropic", "enabled": false, "in": 2.0, "out": 10.0},
+ "gpt-4o":            {"provider": "openai",    "enabled": false, "in": 2.5, "out": 10.0}
+}

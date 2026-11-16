@@ -1,0 +1,6 @@
+# Execution-trace image for pipeline/exec_trace.py.
+# Base = the image the pipeline uses to RUN built Rust programs (pipeline/eval_run.py, translate.run_visible:
+# pyrs-seccodeplt-runner). Adds strace only. Network is used at build time only; containers run with --network none.
+# Build (empty context):  docker build -t pyrs-pilot/rust-trace:v1 - < pipeline/Dockerfile.trace
+FROM pyrs-seccodeplt-runner:latest
+RUN apt-get update && apt-get install -y --no-install-recommends strace && rm -rf /var/lib/apt/lists/*
